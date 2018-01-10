@@ -4,7 +4,7 @@ from django.utils.text import slugify
 from datetime import datetime
 # Create your models here.
 
-def path_save_images(instance,filname):
+def path_save_images(instance,filname): #TODO DRY
     return "{0}/{1}".format(instance.slug,filname)
 
 class Categories(models.Model):
@@ -19,6 +19,11 @@ class Categories(models.Model):
     slug = models.SlugField(max_length = 200,
         unique = True,
         help_text = "Slug de url del post")
+    
+    imagen = models.ImageField(
+        max_length = models.ImageField(upload_to=path_save_images,
+        help_text="Imagen de la categoria")
+    )
 
     
     def _get_unique_slug(self):
