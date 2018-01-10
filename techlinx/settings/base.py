@@ -25,7 +25,8 @@ DJANGO_APPS = (
 )
 
 PROJECT_APPS = (
-
+    'techlinx.Blog',
+    'techlinx.Staff'
 )
 
 THIRD_PACKAGE_APPS = (

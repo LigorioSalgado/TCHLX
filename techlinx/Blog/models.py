@@ -37,7 +37,7 @@ class Categories(models.Model):
     def _get_published_date(self):
         return datetime.now()
 
-     @models.permalink
+    @models.permalink
     def get_absolute_url(self):
         return 'blog:category', (self.slug,)
 
@@ -54,24 +54,25 @@ class Post(models.Model):
         help_text = "Slug de url del post")
     contenido = models.TextField(help_text="Contenido del Post")
     cover = models.ImageField(upload_to=path_save_images,
-    help_text="Imagen de cover del post")
+    help_text = "Imagen de cover del post")
     categoria = models.ForeignKey(Categories,
-        on_delete=models.SET_NULL,
-        blank=True, 
-        null=True
-        help_text="Categoria del post"
-        related_name="publicaciones")
+        on_delete = models.SET_NULL,
+        blank = True, 
+        null = True, 
+        help_text = "Categoria del post",
+        related_name = "publicaciones")
     publicado = models.BooleanField(default=False,
-        help_text="Post esta publicado")
+        verbose_name = "¿Post publicado?",
+        help_text = "Check si post esta publicado")
     fecha_creacion = models.DateField(auto_now_add=True,
-        help_text="Fecha en que se creo el post")
-    fecha_publicacion = models.DeteField(null=True,
+        help_text = "Fecha en que se creo el post")
+    fecha_publicacion = models.DateField(null=True,
         blank=True,
-        help_text="Fecha en la que se publico el post"
+        help_text = "Fecha en la que se publico el post"
     )
     tiempo_estimado = models.IntegerField(
-        help_text="Tiempo aproximado de lectura del post"
-        default=0
+        help_text = "Tiempo aproximado de lectura del post",
+        default = 0
     )
 
 

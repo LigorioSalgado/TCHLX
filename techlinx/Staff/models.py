@@ -45,7 +45,7 @@ class Staff(models.Model):
         null = True,
         blank = True)
     posts = models.ManyToManyField(
-        'techlinx.Blog.models.Post',
+        'Blog.Post',
         related_name="publicaciones"
     )
     
