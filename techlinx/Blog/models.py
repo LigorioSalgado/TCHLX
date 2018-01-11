@@ -73,17 +73,21 @@ class Post(models.Model):
         help_text = "Tiempo aproximado de lectura del post",
         default = 0
     )
-
-
+    autor = models.ForeignKey("Staff.Staff",
+        on_delete=models.CASCADE,
+        help_text="Usuario Autor",
+        null=True,
+        related_name="publicaciones")
 
     def _get_unique_slug(self):
         slug = slugify(self.titulo)
         unique_slug = slug
         num = 1
-        while Article.objects.filter(slug=unique_slug).exists():
+        while Post.objects.filter(slug=unique_slug).exists():
             unique_slug = '{}-{}'.format(slug, num)
             num += 1
         return unique_slug
+
     def _get_published_date(self):
         return datetime.now()
 
@@ -103,6 +107,10 @@ class Post(models.Model):
             self.fecha_publicacion = self._get_published_date()
         self.tiempo_estimado = self._get_average_reading()
         super().save()
+    
+    def __str__(self):
+        return "Post: {0}".format(self.titulo)
+
     
 
 

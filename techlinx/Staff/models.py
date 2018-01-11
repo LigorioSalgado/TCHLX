@@ -44,10 +44,34 @@ class Staff(models.Model):
         help_text = "URL del Perfil de pagina personal", 
         null = True,
         blank = True)
-    posts = models.ManyToManyField(
-        'Blog.Post',
-        related_name="publicaciones"
-    )
+
+    def _get_unique_slug(self):
+        slug = slugify(self.user.username)
+        unique_slug = slug
+        num = 1
+        while Staff.objects.filter(slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, num)
+            num += 1
+        return unique_slug
+    
+    def __str__(self):
+        if self.autor:
+            return "Autor: "+self.user.username
+        elif self.editor:
+            return "Editor: "+self.user.username
+        else:
+            return "Staff: "+self.user.username
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self._get_unique_slug()
+        super().save()
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'autores:detail', (self.slug,)
+ 
+    
     
     
 
