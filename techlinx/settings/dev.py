@@ -9,7 +9,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME':   'blog',                      
         'USER': 'bloguser',
         'PASSWORD': 'blog2018',

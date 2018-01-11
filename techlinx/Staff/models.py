@@ -19,8 +19,8 @@ class Staff(models.Model):
         unique = True)
     biografia = models.TextField(help_text="Biografia del miembro del Staff")
     imagen = models.ImageField(
-        max_length = models.ImageField(upload_to=path_save_images,
-        help_text="Imagen del miembro del staff")
+        upload_to=path_save_images,
+        help_text="Imagen del miembro del staff"
     )
     autor = models.BooleanField(verbose_name="¿Es autor?",
         default = False,

@@ -20,10 +20,9 @@ class Categories(models.Model):
         unique = True,
         help_text = "Slug de url del post")
     
-    imagen = models.ImageField(
-        max_length = models.ImageField(upload_to=path_save_images,
+    imagen = models.ImageField(upload_to=path_save_images,
         help_text="Imagen de la categoria")
-    )
+    
 
     
     def _get_unique_slug(self):
