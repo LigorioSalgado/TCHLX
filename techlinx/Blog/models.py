@@ -103,7 +103,7 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self._get_unique_slug()
-        if self.published and not self.fecha_publicacion:
+        if self.publicado and not self.fecha_publicacion:
             self.fecha_publicacion = self._get_published_date()
         self.tiempo_estimado = self._get_average_reading()
         super().save()
