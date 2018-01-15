@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
-    url(r'^', include("techlinx.Blog.urls") ),
+    url(r'^', include("techlinx.Blog.urls",namespace="blog") ),
     url(r'^summernote/', include('django_summernote.urls')),
 ]
 if settings.DEBUG:

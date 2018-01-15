@@ -57,7 +57,7 @@
             {% for post  in posts  %}
             <article class="post">
                     <div class="post-preview col-10  no-gutter">
-                        <h2><a href="post.html">{{post.titulo}}</a></h2>
+                        <h2><a href="{% url 'blog:post' post.slug  %}">{{post.titulo}}</a></h2>
     
                         <p>{{post.contenido |truncatechars:120 | striptags}} </p>
     
