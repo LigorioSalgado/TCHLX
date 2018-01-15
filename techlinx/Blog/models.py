@@ -26,10 +26,10 @@ class Categories(models.Model):
 
     
     def _get_unique_slug(self):
-        slug = slugify(self.titulo)
+        slug = slugify(self.nombre)
         unique_slug = slug
         num = 1
-        while Article.objects.filter(slug=unique_slug).exists():
+        while Categories.objects.filter(slug=unique_slug).exists():
             unique_slug = '{}-{}'.format(slug, num)
             num += 1
         return unique_slug
@@ -39,6 +39,14 @@ class Categories(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'blog:category', (self.slug,)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self._get_unique_slug()
+        super().save()
+
+    def __str__(self):
+        return "Categoria: {}".format(self.nombre)
 
 class Post(models.Model):
 

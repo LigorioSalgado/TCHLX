@@ -1,8 +1,12 @@
 from django.shortcuts import render
-
+from .models import Post,Categories
 # Create your views here.
 
 
 def index(request):
     imagen = "/static/img/default-sidebar.jpg"
-    return render(request,'blog/index.html',{'image':imagen})
+    posts =  Post.objects.filter(publicado=True).select_related('autor').order_by('fecha_publicacion')
+    categories = Categories.objects.all()
+    print(posts.count())
+
+    return render(request,'blog/index.html',{'image':imagen,'posts':posts, 'categories':categories})
