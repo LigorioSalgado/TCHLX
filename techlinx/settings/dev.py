@@ -26,3 +26,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+BITLY_LOGIN = "salgadolg5@hotmail.com"
+BITLY_API_KEY = "b8ebd1afc77d7b830af0baabe531ba7d7ccfeaa5"
+
+SITE_ID =2

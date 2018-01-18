@@ -5,7 +5,7 @@ from .models import Post,Categories
 
 def index(request):
     imagen = "/static/img/default-sidebar.jpg"
-    posts =  Post.objects.filter(publicado=True).select_related('autor').order_by('fecha_publicacion')
+    posts =  Post.objects.filter(publicado=True).select_related('autor').order_by('-fecha_publicacion')
     categories = Categories.objects.all()
     print(posts.count())
 
@@ -14,6 +14,8 @@ def index(request):
 
 
 def post(request,slug):
+    host = request.META.get('HTTP_HOST','localhost:8000')
+    url = "http://{0}/{1}/{2}".format(host,'posts',slug)
     post = get_object_or_404(Post,slug=slug)
     print('post: '+post.titulo)
-    return render(request,'blog/post.html',{'post':post})
+    return render(request,'blog/post/post.html',{'post':post, "url":url})

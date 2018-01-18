@@ -7,22 +7,31 @@ from django_summernote.admin import SummernoteModelAdmin
 
 class PostAdmin(SummernoteModelAdmin):
     summer_note_fields = ('contenido',)
-    fields = ('titulo','contenido','cover','categoria','publicado')
-    list_display = ('titulo','categoria','publicado','fecha_creacion')
+    fields = ('titulo', 'contenido', 'cover', 'categoria')
+    list_display = ('titulo', 'categoria', 'publicado', 'fecha_creacion')
+
+    def _editor_or_superuser(self, request):
+        editor = Staff.objects.filter(user=request.user, editor=True).exists()
+        if request.user.is_superuser or editor:
+            return True
+        return False
+
+    def get_form(self, request, obj=None, **kwargs):
+        editor_fields = ('publicado', )
+        if self._editor_or_superuser(request):
+            self.fields = self.fields + editor_fields
+        else:
+            self.fields
+        return super(PostAdmin, self).get_form(request, obj, **kwargs)
+
     def get_queryset(self, request):
         qs = super(PostAdmin, self).get_queryset(request)
-        try:
-            editor = Staff.objects.filter(user=request.user,editor=True).exists()
-        except Exception  as e:
-            print("Excepcion "+ str(e))
-            editor = False
-        print(editor)
-        if request.user.is_superuser or editor:
+        if self._editor_or_superuser(request):
             return qs
         return qs.filter(autor__user=request.user)
 
     def save_model(self, request, obj, form, change):
-        print("Cambios??? "+ str(change))
+        print("Cambios??? " + str(change))
         if not change:
             obj.autor = Staff.objects.get(user__id=request.user.id)
         super().save_model(request, obj, form, change)
@@ -36,10 +45,9 @@ class PostAdmin(SummernoteModelAdmin):
     author.short_description = "Autor del post"
     time_estimate.short_description = "Tiempo estimado de lectura"
 
-    
 
 class CategorieAdmin(admin.ModelAdmin):
-    fields = ('nombre','imagen')
+    fields = ('nombre', 'imagen')
 
 
 admin.site.register(Post, PostAdmin)

@@ -23,6 +23,7 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites'
 )
 
 PROJECT_APPS = (
@@ -32,6 +33,8 @@ PROJECT_APPS = (
 
 THIRD_PACKAGE_APPS = (
 'django_summernote',
+'django_bitly',
+'django_extensions'
 )
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PACKAGE_APPS
@@ -96,7 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es_mx'
 
 TIME_ZONE = 'America/Mexico_City'
 
