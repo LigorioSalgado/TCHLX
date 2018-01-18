@@ -1269,6 +1269,10 @@ blockquote {
   margin: 50px -5%;
 }
 
+pre {
+  font-size: 2em !important;
+}
+
 /* line 57, ../sass/partials/_single.sass */
 .single-content,
 .single-content-sidebar {

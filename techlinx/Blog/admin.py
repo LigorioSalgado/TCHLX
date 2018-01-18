@@ -8,8 +8,7 @@ from django_summernote.admin import SummernoteModelAdmin
 class PostAdmin(SummernoteModelAdmin):
     summer_note_fields = ('contenido',)
     fields = ('titulo','contenido','cover','categoria','publicado')
-    readonly_fields = ('time_estimate',)
-   
+    list_display = ('titulo','categoria','publicado','fecha_creacion')
     def get_queryset(self, request):
         qs = super(PostAdmin, self).get_queryset(request)
         try:
