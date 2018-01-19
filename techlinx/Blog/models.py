@@ -50,10 +50,8 @@ class Categories(models.Model):
 
 class Post(models.Model):
 
-    id = models.UUIDField(primary_key = True,
-        unique = True, 
-        default = uuid4,
-        editable = False)
+    id = models.AutoField(primary_key = True,
+        unique = True)
     titulo = models.CharField(max_length = 150, 
         help_text="Titulo del Post")
     slug = models.SlugField(max_length = 200,

@@ -14,8 +14,7 @@ def index(request):
 
 
 def post(request,slug):
-    host = request.META.get('HTTP_HOST','localhost:8000')
-    url = "http://{0}/{1}/{2}".format(host,'posts',slug)
+
     post = get_object_or_404(Post,slug=slug)
     print('post: '+post.titulo)
-    return render(request,'blog/post/post.html',{'post':post, "url":url})
+    return render(request,'blog/post/post.html',{'post':post})
