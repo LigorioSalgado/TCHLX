@@ -1,6 +1,8 @@
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand,CommandError
 from techlinx.Staff.models import Staff
 from django.contrib.auth.models import User,Group
+from django.core.files import File
+from django.conf import settings
 from faker import Faker
 
 
@@ -20,21 +22,24 @@ class Command(BaseCommand):
             is_staff = True
         )
         grupo = Group.objects.get(name="Editores") if editor else Group.objects.get(name="Autores")
-        grupo.user__set.add(user)
+        grupo.user_set.add(user)
 
         return user
 
-    def _create_new_staff(self,user,editor=False):
-        user = user()
+    def _create_new_staff(self,editor=False):
+     
         num_staff = 2 if editor else 5
         for x in range(0,num_staff):
-            staff = Staff.objects.create(
-                user = user(),
+            staff = Staff(
+                user = self._create_new_user(editor=editor),
                 biografia = self.fake.text(),
                 autor = not editor,
                 editor = editor
             )
+            path = settings.BASE_DIR+'/temp/user.png'
 
+            staff.imagen.save(self.fake.random_letter()+".png",File(open(path,'r')))
+    
 
 
     def add_arguments(self,parser):
@@ -42,9 +47,11 @@ class Command(BaseCommand):
     
     
     def handle(self,*args, **options):
-        staff = Staff()
-        
-        if options['Editor']:
-            pass
-        else:
-            pass
+        try:
+            if options.get('Editor',None):
+                self._create_new_staff(editor=True)
+            else:
+                self._create_new_staff()
+        except Exception as e:
+            raise CommandError("Error con mensaje: "+str(e))
+        self.stdout.write(self.style.SUCCESS('Miembros de estaff creados correctamente'))
