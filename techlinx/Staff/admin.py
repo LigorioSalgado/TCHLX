@@ -3,6 +3,6 @@ from .models import Staff
 # Register your models here.
 
 class StaffAdmin(admin.ModelAdmin):
-    pass
+    exclude = ('slug', )
 
 admin.site.register(Staff,StaffAdmin)

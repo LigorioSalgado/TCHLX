@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.text import slugify
+
 import uuid
 # Create your models here.
 

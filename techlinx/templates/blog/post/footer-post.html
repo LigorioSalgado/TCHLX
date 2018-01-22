@@ -3,22 +3,22 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-md-2">
-                        <img src="{{autor.imagen.url}}" class="user-icon " alt="user-image">
+                        <img src="{{post.autor.imagen.url}}" class="user-icon " alt="user-image">
                     </div>
                     <div class="col-xs-12 col-md-6">
                         <div class="category-list">
-                            <p>Published <span>{{publicacion}}</span></p>
-                            <p><a href="#">{{autor.first_name}} {{autor.last_name}}</a> in <a href="#">{{categoria}}</a></p>
+                            <p>Publicado <span>{{post.fecha_publicacion}}</span></p>
+                            <p><a href="#">{{post.autor.user.first_name}} {{post.autor.user.last_name}}</a> in <a href="#">{{post.categoria.nombre}}</a></p>
 
                         </div>
                     </div><!-- end col -->
                     <div class="col-xs-12 col-md-4">
                         <div class="social">
-                            <p>Share this article</a>
+                            <p>Compartir con: </a>
                             <div class="social-links">
-                                <a class="social-icon" href="#" data-platform="twitter" data-message="Message about this post" data-url=""><i class="fa fa-twitter"></i></a>
+                                <a class="social-icon" href="#" data-platform="twitter" data-message="Message about this post" data-url="{{ post|bitlify }}"><i class="fa fa-twitter"></i></a>
 
-                                <a class="social-icon" href="#" data-platform="facebook" data-message="Message about this post" data-url=""><i class="fa fa-facebook-official"></i></a>
+                                <a class="social-icon" href="#" data-platform="facebook" data-message="Message about this post" data-url="{{ post|bitlify }}"><i class="fa fa-facebook-official"></i></a>
 
                                 <a class="social-icon" data-platform="mail"  href="mailto:support@writertheme.com"><i class="fa fa-envelope"></i></a>
                             </div>
