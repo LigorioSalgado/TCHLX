@@ -5,7 +5,7 @@ from django.db.models import Q
 
 
 def index(request):
-    imagen = "/static/img/default-sidebar.jpg"
+    imagen = "/static/img/sidebar.jpg"
     posts =  Post.objects.filter(publicado=True).select_related('autor').order_by('-fecha_publicacion')
     categories = Categories.objects.all()
     print(posts.count())
