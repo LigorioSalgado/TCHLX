@@ -2016,3 +2016,13 @@ a:hover, a:active, a:focus {
   color: #333;
   border-bottom: solid 1px #999;
 }
+
+.page-link {
+  color: #000 !important;
+}
+
+.page-item.active .page-link {
+  background-color: #000000;
+  border-color: #000000;
+
+}
