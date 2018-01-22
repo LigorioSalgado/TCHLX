@@ -27,29 +27,24 @@
                     </div>
 
                     <div class="sidebar-readtime">
-                        <i class="fa fa-bookmark"></i> {{post.tiempo_estimado}} minute read
+                        <i class="fa fa-bookmark"></i> {{post.tiempo_estimado}} minuto(s) de lectura
                     </div>
 
                 </div>
 
 
-                <h2 class="favorites">Similar Posts</h2>
+                {% if related %}
+                <h2 class="favorites">Posts Similares</h2>
 
-                <div class="similar-post">
-                    <a href="post.html"><h3>Leave the City for a Life on the Road</h3></a>
-                </div>
+                    {% for post in related  %}
+                    <div class="similar-post">
+                        <a href="{{post.get_absolute_url}}"><h3>{{post.titulo}}</h3></a>
+                    </div>
+                    {% endfor %}
 
-                <div class="similar-post">
-                    <a href="post.html"><h3>The Best Story Never Told</h3></a>
-                </div>
+                {% endif %}
 
-                <div class="similar-post">
-                    <a href="post.html"><h3>Stop Thinking and Start Doing</h3></a>
-                </div>
-
-                <div class="similar-post">
-                    <a href="post.html"><h3>You Don't Have To Be Great To Get Started</h3></a>
-                </div>
+               
 
             </div>
 

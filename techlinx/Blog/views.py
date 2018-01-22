@@ -1,5 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Post,Categories
+from django.db.models import Q
 # Create your views here.
 
 
@@ -17,4 +18,5 @@ def post(request,slug):
 
     post = get_object_or_404(Post,slug=slug)
     print('post: '+post.titulo)
-    return render(request,'blog/post/post.html',{'post':post})
+    related = Post.objects.filter(Q(categoria=post.categoria) | Q(autor=post.autor), ~Q(titulo=post.titulo))[:3]
+    return render(request,'blog/post/post.html',{'post':post,'related':related})
