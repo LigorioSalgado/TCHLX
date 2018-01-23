@@ -6,4 +6,5 @@ from .models import Staff
 def autor(request,slug):
     autor = get_object_or_404(Staff,slug=slug)
     image = "/static/img/sidebar.jpg"
-    return render(request,'blog/autores/perfil.html',{'autor':autor,'image':image})
+    publicaciones = autor.publicaciones.all().order_by('-fecha_publicacion')[:4]
+    return render(request,'blog/autores/perfil.html',{'autor':autor,'image':image,'publicaciones':publicaciones})
