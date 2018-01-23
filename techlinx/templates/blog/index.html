@@ -62,7 +62,7 @@
                         <p>{{post.contenido |truncatechars:120 | striptags}} </p>
     
                         <p class="meta">
-                            <a href="author.html">{{post.autor.user.first_name}} {{post.autor.user.last_name}} </a> en 
+                            <a href="{{post.autor.get_absolute_url}}">{{post.autor.user.first_name}} {{post.autor.user.last_name}} </a> en 
                             <a href="category.html">{{post.categoria.nombre}}</a> <i class="link-spacer"></i> <i class="fa fa-bookmark"></i> {{post.tiempo_estimado}} minuto(s) de lectura
                         </p>
                     </div>

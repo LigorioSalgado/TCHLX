@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     url(r'^', include("techlinx.Blog.urls",namespace="blog") ),
+    url(r'^autor/', include("techlinx.Staff.urls",namespace="autores") ),
     url(r'^summernote/', include('django_summernote.urls')),
 ]
 if settings.DEBUG:
